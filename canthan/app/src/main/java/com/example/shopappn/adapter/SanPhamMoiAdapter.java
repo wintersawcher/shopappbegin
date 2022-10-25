@@ -37,7 +37,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         SanPhamMoi sanPhamMoi = array.get(position);
         holder.txtten.setText(sanPhamMoi.getTensp());
         holder.txtgia.setText(sanPhamMoi.getGiaSp());
-        Glide.with(context).load(sanPhamMoi.getHinhanh());
+        Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
 
     }
 
