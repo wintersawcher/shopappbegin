@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginTop="15dp"
-    >
+    android:layout_marginTop="15dp">
     <ImageView
         android:id="@+id/item_image"
         android:src="@drawable/ic_media_24"
