@@ -8,6 +8,16 @@
     <ImageView
         android:id="@+id/item_image"
         android:src="@drawable/ic_media_24"
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
+    <TextView
+        android:id="@+id/item_tensp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Điện thoại"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"/>
+
 </LinearLayout>

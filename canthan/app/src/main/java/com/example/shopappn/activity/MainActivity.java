@@ -21,6 +21,8 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.example.shopappn.R;
+import com.example.shopappn.adapter.LoaiSpAdapter;
+import com.example.shopappn.model.LoaiSp;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ListView listViewManHinhChinh;
     DrawerLayout drawerLayout;
+    LoaiSpAdapter loaiSpAdapter;
+    List<LoaiSp> mangloaisp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh = findViewById(R.id.listiviewmanhinhchinh);
         navigationView = findViewById(R.id.navigationview);
         drawerLayout = findViewById(R.id.drawerlayout);
+        // khởi tạo adapter
+        mangloaisp = new ArrayList<>();
+        loaiSpAdapter = new LoaiSpAdapter(this,mangloaisp);
+        listViewManHinhChinh.setAdapter(loaiSpAdapter);
+
 
     }
     private void ActionBar(){
