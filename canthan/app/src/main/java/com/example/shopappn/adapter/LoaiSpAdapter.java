@@ -50,6 +50,7 @@ public class LoaiSpAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.item_sanpham,null);
             viewHolder.textensp = view.findViewById(R.id.item_tensp);
             viewHolder.imghinhanh = view.findViewById(R.id.item_image);
+            view.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) view.getTag();
         viewHolder.textensp.setText(array.get(i).getTensanpham());

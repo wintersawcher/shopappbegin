@@ -7,6 +7,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import android.view.View;
@@ -17,16 +20,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.example.shopappn.R;
 import com.example.shopappn.adapter.LoaiSpAdapter;
 import com.example.shopappn.model.LoaiSp;
+import com.example.shopappn.model.LoaiSpModel;
+import com.example.shopappn.retrofit.ApiBanHang;
+import com.example.shopappn.retrofit.RetrofitClient;
+import com.example.shopappn.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -37,13 +49,37 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     LoaiSpAdapter loaiSpAdapter;
     List<LoaiSp> mangloaisp;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    ApiBanHang apiBanHang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         AnhXa();
         ActionBar();
         ActionViewFlipper();
+        if(isConnected(this)){
+
+            getLoaiSanPham();
+        } else{
+            Toast.makeText(this, "Không có internet,vui lòng kết nối", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getLoaiSanPham() {
+      compositeDisposable.add(apiBanHang.getLoaiSp()
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(
+                    loaiSpModel -> {
+                        if (loaiSpModel.isSuccess()){
+                            mangloaisp = loaiSpModel.getResult();
+                            loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(),mangloaisp);
+                            listViewManHinhChinh.setAdapter(loaiSpAdapter);
+                        }
+                    }
+              ));
     }
 
     private void ActionViewFlipper() {
@@ -75,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerlayout);
         // khởi tạo adapter
         mangloaisp = new ArrayList<>();
-        loaiSpAdapter = new LoaiSpAdapter(this,mangloaisp);
-        listViewManHinhChinh.setAdapter(loaiSpAdapter);
+
 
 
     }
@@ -91,5 +126,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private  boolean isConnected(Context context){
+        ConnectivityManager connectivityManager  =(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if((wifi !=null && wifi.isConnected()) ||(mobile.isConnected())){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    protected  void onDestroy(){
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 }
