@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.shopappn.R;
 import com.example.shopappn.model.SanPhamMoi;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.MyViewHolder> {
@@ -36,7 +37,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         SanPhamMoi sanPhamMoi = array.get(position);
         holder.txtten.setText(sanPhamMoi.getTensp());
-        holder.txtgia.setText(sanPhamMoi.getGiaSp());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.txtgia.setText("Giá "+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiaSp()))+"Đ");
         Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
 
     }
