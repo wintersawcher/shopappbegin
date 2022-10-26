@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.shopappn.R;
 import com.example.shopappn.model.SanPhamMoi;
 
+
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         SanPhamMoi sanPhamMoi = array.get(position);
         holder.txtten.setText(sanPhamMoi.getTensp());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtgia.setText("Giá "+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiaSp()))+"Đ");
+        holder.txtgia.setText("Gia :"+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp()))+"D");
         Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
 
     }

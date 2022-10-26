@@ -4,7 +4,7 @@ public class SanPhamMoi {
     int id;
     String tensp;
     String hinhanh;
-    String giaSp;
+    String giasp;
     String mota;
     int loai;
 
@@ -32,12 +32,12 @@ public class SanPhamMoi {
         this.hinhanh = hinhanh;
     }
 
-    public String getGiaSp() {
-        return giaSp;
+    public String getGiasp() {
+        return giasp;
     }
 
-    public void setGiaSp(String giaSp) {
-        this.giaSp = giaSp;
+    public void setGiasp(String giasp) {
+        this.giasp = giasp;
     }
 
     public String getMota() {
