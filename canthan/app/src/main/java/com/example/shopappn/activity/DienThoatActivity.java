@@ -117,6 +117,7 @@ public class DienThoatActivity extends AppCompatActivity {
                                   }
                               }else{
                                   Toast.makeText(getApplicationContext(),"Hết dữ liệu rồi",Toast.LENGTH_LONG).show();
+                                  isLoading = true;
                               }
 
                             },

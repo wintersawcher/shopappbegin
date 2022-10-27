@@ -1,6 +1,7 @@
 package com.example.shopappn.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shopappn.R;
+import com.example.shopappn.activity.ChiTietMainActivity;
+import com.example.shopappn.inteface.ItemClickListener;
 import com.example.shopappn.model.SanPhamMoi;
 
 
@@ -41,6 +44,19 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtgia.setText("Gia :"+decimalFormat.format(Double.parseDouble(sanPhamMoi.getGiasp()))+"D");
         Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
+        holder.setItemClickListener(new ItemClickListener() {
+                                              @Override
+                                              public void onClick(View view, int pos, boolean isLongClick) {
+                                                  if(!isLongClick){
+                                                      Intent intent = new Intent(context, ChiTietMainActivity.class);
+                                                      intent.putExtra("chitiet",sanPhamMoi);
+                                                      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                      context.startActivity(intent);
+
+                                                  }
+                                              }
+                                          }
+        );
 
     }
 
@@ -49,7 +65,8 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         return array.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private ItemClickListener itemClickListener;
         TextView txtgia,txtten;
         ImageView   imghinhanh;
          public MyViewHolder(@NonNull View itemView){
@@ -57,6 +74,16 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
               txtgia = itemView.findViewById(R.id.itemsp_gia);
               txtten = itemView.findViewById(R.id.itemsp_ten);
               imghinhanh = itemView.findViewById(R.id.itemsp_image);
+              itemView.setOnClickListener(this);
          }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onClick(view,getAdapterPosition(),false);
+        }
     }
 }

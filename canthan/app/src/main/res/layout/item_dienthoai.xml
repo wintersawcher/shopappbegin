@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
-    android:layout_height="wrap_content">
+    android:elevation="8dp"
+    app:cardCornerRadius="4sp"
+    android:layout_margin="5dp"
+    android:layout_height="150dp">
   <LinearLayout
       android:weightSum="10"
       android:layout_marginTop="10dp"
@@ -36,7 +38,6 @@
       <TextView
           android:id="@+id/itemdt_idsp"
           android:gravity="center"
-          android:textSize="20sp"
           android:textStyle="bold"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>

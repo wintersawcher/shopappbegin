@@ -89,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         Intent dienthoai = new Intent(getApplicationContext(),DienThoatActivity.class);
                         dienthoai.putExtra("loai",1);
+
                         startActivity(dienthoai);
                         break;
                     case 2:
-                        Intent laptop = new Intent(getApplicationContext(),LapTopActivity.class);
+                        Intent laptop = new Intent(getApplicationContext(),DienThoatActivity.class);
+                        laptop.putExtra("loai",2);
                         startActivity(laptop);
                         break;
-
-
                 }
             }
         });
@@ -168,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
         // khởi tạo adapter
         mangloaisp = new ArrayList<>();
         mangSpMoi = new ArrayList<>();
+        if(Utils.manggiohang == null){
+            Utils.manggiohang = new ArrayList<>();
+        }
 
 
 

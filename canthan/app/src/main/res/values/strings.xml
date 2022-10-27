@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">shopappn</string>
+    <string name="gi_25000">Giá: 25000</string>
+    <string name="t_n_s_n_ph_m">Tên sản phẩm</string>
 </resources>

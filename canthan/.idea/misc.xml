@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/codeshop/canthan/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1205" />
+        <entry key="..\:/codeshop/canthan/app/src/main/res/drawable/ic_cart_24.xml" value="0.1595" />
         <entry key="..\:/codeshop/canthan/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1205" />
+        <entry key="..\:/codeshop/canthan/app/src/main/res/drawable/spinner.xml" value="0.1595" />
+        <entry key="..\:/codeshop/canthan/app/src/main/res/layout/activity_chi_tiet_main.xml" value="0.21145833333333333" />
         <entry key="..\:/codeshop/canthan/app/src/main/res/layout/activity_dien_thoai.xml" value="0.234375" />
         <entry key="..\:/codeshop/canthan/app/src/main/res/layout/activity_dien_thoat.xml" value="0.10989583333333333" />
         <entry key="..\:/codeshop/canthan/app/src/main/res/layout/activity_lap_top.xml" value="0.25" />
