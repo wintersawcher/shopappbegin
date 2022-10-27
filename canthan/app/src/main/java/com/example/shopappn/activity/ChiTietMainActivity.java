@@ -17,6 +17,7 @@ import com.example.shopappn.R;
 import com.example.shopappn.model.GioHang;
 import com.example.shopappn.model.SanPhamMoi;
 import com.example.shopappn.utils.Utils;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ChiTietMainActivity extends AppCompatActivity {
    Toolbar toolbar;
    Spinner spinner;
     SanPhamMoi sanPhamMoi;
+    NotificationBadge badge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class ChiTietMainActivity extends AppCompatActivity {
             gioHang.setHinhsp(sanPhamMoi.getHinhanh());
             Utils.manggiohang.add(gioHang);
         }
+        badge.setText(String.valueOf(Utils.manggiohang.size()));
     }
 
     private void initData() {
@@ -102,6 +105,10 @@ public class ChiTietMainActivity extends AppCompatActivity {
         imghinhanh = findViewById(R.id.imgchitiet);
         spinner = findViewById(R.id.spinner);
         btnThem = findViewById(R.id.btnthemvaogiohang);
+        badge = findViewById(R.id.menu_sl);
+        if(Utils.manggiohang !=null){
+            badge.setText(String.valueOf(Utils.manggiohang.size()));
+        }
     }
     private void ActionBar(){
         setSupportActionBar(toolbar);
