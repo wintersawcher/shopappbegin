@@ -19,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ActionMenuView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -38,6 +39,7 @@ import com.example.shopappn.retrofit.ApiBanHang;
 import com.example.shopappn.retrofit.RetrofitClient;
 import com.example.shopappn.utils.Utils;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     ApiBanHang apiBanHang;
     List<SanPhamMoi> mangSpMoi;
     SanPhamMoiAdapter spAdapter;
+    NotificationBadge badge;
+    FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper.setInAnimation(slide_out);
 
     }
-
     private void AnhXa() {
         toolbar = findViewById(R.id.toolbarmanhinhchinh);
         viewFlipper = findViewById(R.id.viewlipper);
@@ -165,16 +168,39 @@ public class MainActivity extends AppCompatActivity {
         listViewManHinhChinh = findViewById(R.id.listiviewmanhinhchinh);
         navigationView = findViewById(R.id.navigationview);
         drawerLayout = findViewById(R.id.drawerlayout);
+        badge = findViewById(R.id.menu_sl);
+        frameLayout = findViewById(R.id.framegiohang);
         // khởi tạo adapter
         mangloaisp = new ArrayList<>();
         mangSpMoi = new ArrayList<>();
         if(Utils.manggiohang == null){
             Utils.manggiohang = new ArrayList<>();
+        }else{
+            int  totalItem = 0;
+            for(int i=0;i<Utils.manggiohang.size();i++){
+                totalItem =  totalItem+Utils.manggiohang.get(i).getSoluong();
+            }
+            badge.setText(String.valueOf(totalItem));
         }
-
-
-
+       frameLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent gioHang = new Intent(getApplicationContext(),GioHangActivity.class);
+               startActivity(gioHang);
+           }
+       });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int  totalItem = 0;
+        for(int i=0;i<Utils.manggiohang.size();i++){
+            totalItem =  totalItem+Utils.manggiohang.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
+    }
+
     private void ActionBar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
